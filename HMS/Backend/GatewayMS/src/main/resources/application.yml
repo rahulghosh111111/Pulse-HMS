@@ -7,24 +7,23 @@ spring:
 
   cloud:
     gateway:
-      server:
-        webflux:
-          globalcors:
-            cors-configurations:
-              '[/**]':
-                allowedOrigins:
-                  - "http://localhost:3000"
-                allowedMethods:
-                  - GET
-                  - POST
-                  - PUT
-                  - DELETE
-                allowedHeaders:
-                  - "*"
-          routes:
-            - id: UserMS
-              uri: http://localhost:8080
-              predicates:
-                - Path=/user/**
-              filters:
-                - TokenFilter
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders:
+              - "*"
+
+      routes:
+        - id: UserMS
+          uri: http://localhost:8080
+          predicates:
+            - Path=/user/**
+          filters:
+            - name: TokenFilter

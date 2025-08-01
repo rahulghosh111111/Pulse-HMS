@@ -25,7 +25,7 @@ public class TokenFilter extends AbstractGatewayFilterFactory<TokenFilter.Config
         // TODO Auto-generated method stub
         return (exchange, chain) -> {
             String path = exchange.getRequest().getPath().toString();
-            if (path.equals("/user/login") || path.equals("/user/register")) {
+            if (path.matches(".*/user/(login|register).*")) {
 
                 return chain.filter(exchange.mutate()
                         .request(r -> r.header("X-Secret-Key", "SECRET")).build());
